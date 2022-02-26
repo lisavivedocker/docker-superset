@@ -66,6 +66,11 @@ ENV PATH=${SUPERSET_HOME}/superset/bin:$PATH \
 # Install superset python packages
 # RUN pip install --install-option="--prefix=$SUPERSET_HOME" superset==$SUPERSET_VERSION
 
+
+# Install Dremio ODBC driver - modif
+RUN pip install pyodbc
+RUN wget https://download.dremio.com/odbc-driver/1.5.4.1002/dremio-odbc-1.5.4.1002-1.x86_64.rpm
+
 COPY script/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN ln -s /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
